@@ -9,12 +9,10 @@ const Admin = () => {
         w-full h-full grid grid-cols-1 lg:grid-cols-[15%_85%] grid-rows-[auto_1fr] min-h-screen
       "
     >
-      {/* Sidebar */}
       <div className="row-span-1 lg:row-span-2">
         <Sidebar />
       </div>
 
-      {/* Navbar */}
       <div className="col-span-1">
         <Navbar />
       </div>

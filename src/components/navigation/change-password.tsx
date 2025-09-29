@@ -35,7 +35,9 @@ const ChangePassword = () => {
       setCurrent("");
       setNext("");
       setConfirm("");
-    } catch {}
+    } catch  {
+      console.log('error');
+    }
   };
 
   return (

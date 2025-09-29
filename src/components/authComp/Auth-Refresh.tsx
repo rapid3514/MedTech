@@ -1,4 +1,3 @@
-// src/bootstrap/AuthGate.tsx
 
 import { useEffect } from "react";
 import { api } from "../../Service/api";

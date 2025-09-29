@@ -11,16 +11,14 @@ const Sidebar = () => {
           <ReorderIcon />
         </div>
 
-        {/* Dashboard (Charts) link */}
         <Link to="/admin/charts" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary" className="m-4 w-full">
+          <Button variant="contained" color="primary" sx={{marginTop:1, width: '100%' }}>
             Dashboard
           </Button>
         </Link>
 
-        {/* Users link */}
         <Link to="/admin/user" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary" className="m-4 w-full">
+          <Button variant="contained" color="primary" sx={{marginTop:1, width: '100%' }}>
             User
           </Button>
         </Link>

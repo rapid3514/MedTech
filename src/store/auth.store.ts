@@ -6,11 +6,12 @@ export type User = {
   id: string;
   email: string;
   role: Role;
-  mustChangePassword: boolean;
-  firstname:string,
-  lastname:string;
-  password:string
+  mustChangePassword?: boolean;
+  firstname: string;   
+  lastname: string;    
+  isActive: boolean;
 };
+
 
 type AuthState = {
   token: string | null;

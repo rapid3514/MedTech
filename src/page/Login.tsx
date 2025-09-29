@@ -4,7 +4,6 @@ import { useAuth } from "../store/auth.store";
 import { api } from "../Service/api";
 import { rolePath } from "../Routes/role-path";
 
-// Material UI importlari
 import {
   Box,
   Button,
