@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../store/auth.store";
+
 
 const Sidebar = () => {
+  const { user } = useAuth();
+
   return (
     <div className="w-full h-full shadow-xl">
       <div className="w-[90%] mx-auto">
@@ -11,17 +15,75 @@ const Sidebar = () => {
           <ReorderIcon />
         </div>
 
-        <Link to="/admin/charts" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary" sx={{marginTop:1, width: '100%' }}>
+        {user?.role === "admin" && (
+          <>
+            <Link to="/admin/charts" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                Dashboard
+              </Button>
+            </Link>
+
+            <Link to="/admin/user" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                User
+              </Button>
+            </Link>
+               <Link to="/admin/admin-patients" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                Patients menegmant
+              </Button>
+            </Link>
+          </>
+        )}
+
+        {user?.role === "reception" && (
+          <>
+            <Link to="appontments" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                Bemor qo‘shish
+              </Button>
+            </Link>
+
+            <Link to="patients" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                Uchrashuvlar
+              </Button>
+            </Link>
+            
+          </>
+        )}
+
+        {/* Doctor uchun */}
+        {user?.role === "doctor" && (
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ marginTop: 1, width: "100%" }}
+            disabled // 👈 navigatsiya yo‘q, faqat button
+          >
             Dashboard
           </Button>
-        </Link>
-
-        <Link to="/admin/user" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary" sx={{marginTop:1, width: '100%' }}>
-            User
-          </Button>
-        </Link>
+        )}
       </div>
     </div>
   );

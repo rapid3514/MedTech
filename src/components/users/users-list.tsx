@@ -165,7 +165,7 @@ const Userslist = () => {
                 />
 
                 <div>
-                  <Button size="small" color="primary" variant="contained" onClick={() => handleEditClick(user)}>
+                  <Button size="small" color="primary" variant="contained" sx={{marginRight:1}} onClick={() => handleEditClick(user)}>
                     Edit
                   </Button>
                   <Button size="small" color="error" variant="outlined" onClick={() => handleDelete(user.id)}>

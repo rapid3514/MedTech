@@ -9,6 +9,9 @@ import ChangePassword from "./components/navigation/change-password";
 import CreateUserForm from "./components/users/create-user";
 import Userslist from "./components/users/users-list";
 import Chartspage from "./page/charts-page";
+import Addpatients from "./components/receptioncomp/addpatients";
+import Appontimentslist from "./components/receptioncomp/appontiments-list";
+import PatientsManagement from "./components/receptioncomp/patents-menegmant";
 
 function App() {
   return (
@@ -16,8 +19,6 @@ function App() {
       <AuthRefresh>
         <Routes>
           <Route path="/login" element={<Login />} />
-
-          {/* Admin panel */}
           <Route
             path="/admin"
             element={
@@ -26,13 +27,12 @@ function App() {
               </RoleRoute>
             }
           >
-            {/* default page => charts */}
             <Route index element={<Chartspage />} />
             <Route path="charts" element={<Chartspage />} />
+            <Route path="admin-patients" element={<PatientsManagement/>} />
             <Route path="user" element={<Userslist />} />
           </Route>
 
-          {/* Doctor */}
           <Route
             path="/doctor"
             element={
@@ -42,7 +42,6 @@ function App() {
             }
           />
 
-          {/* Reception */}
           <Route
             path="/reception"
             element={
@@ -50,10 +49,13 @@ function App() {
                 <Reception />
               </RoleRoute>
             }
-          />
+          >
+            <Route path="appontments" element={<Appontimentslist/>} />
+            <Route path="patients" element={<Addpatients />} />
+          </Route>
 
-          {/* Other */}
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/create-patents" element={<Addpatients />} />
           <Route path="/create-user" element={<CreateUserForm />} />
         </Routes>
       </AuthRefresh>

@@ -19,16 +19,19 @@ const Login = () => {
   const { login } = useAuth();
   const nav = useNavigate();
 
-  async function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    const { data } = await api.post("/auth/login", { email, password });
-    login(data.access_token, data.user);
-    if (data.user.mustChangePassword) {
-      nav("/change-password", { replace: true });
-      return;
-    }
-    nav(rolePath[data.user.role as keyof typeof rolePath], { replace: true });
+async function onSubmit(e: FormEvent) {
+  e.preventDefault();
+  const { data } = await api.post("/auth/login", { email, password });
+  console.log("Login response:", data);
+  login(data.access_token, data.user);
+  if (data.user.mustChangePassword) {
+    nav("/change-password", { replace: true });
+    return;
   }
+const role = data.user.role.toLowerCase();
+nav(rolePath[role as keyof typeof rolePath], { replace: true });
+}
+
 
   return (
    <Box
