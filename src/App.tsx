@@ -12,6 +12,8 @@ import Chartspage from "./page/charts-page";
 import Addpatients from "./components/receptioncomp/addpatients";
 import Appontimentslist from "./components/receptioncomp/appontiments-list";
 import PatientsManagement from "./components/receptioncomp/patents-menegmant";
+import Patentsmenegmant from "./components/receptioncomp/patents-menegmant";
+import Appointments from "./components/receptioncomp/add-appontiments";
 
 function App() {
   return (
@@ -55,8 +57,9 @@ function App() {
           </Route>
 
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/create-patents" element={<Addpatients />} />
+          <Route path="/create-patents" element={<Appointments />} />
           <Route path="/create-user" element={<CreateUserForm />} />
+          <Route path="/patients/:id" element={<Patentsmenegmant />} />
         </Routes>
       </AuthRefresh>
     </>

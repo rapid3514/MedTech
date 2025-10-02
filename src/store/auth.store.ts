@@ -1,4 +1,3 @@
-
 import { create } from "zustand";
 import { api } from "../Service/api";
 export type Role = "admin" | "doctor" | "reception";
@@ -7,12 +6,22 @@ export type User = {
   email: string;
   role: Role;
   mustChangePassword?: boolean;
-  firstname: string;   
-  lastname: string;    
+  firstname: string;
+  lastname: string;
   isActive: boolean;
 };
 
-
+export type Patient = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  phone: string;
+  email: string;
+  notes: string;
+  createdAt: boolean;
+  updatedAt: boolean;
+};
 type AuthState = {
   token: string | null;
   user: User | null;
