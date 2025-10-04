@@ -50,7 +50,7 @@ const Sidebar = () => {
 
         {user?.role === "reception" && (
           <>
-            <Link to="appontments" style={{ textDecoration: "none" }}>
+            <Link to="" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="primary"

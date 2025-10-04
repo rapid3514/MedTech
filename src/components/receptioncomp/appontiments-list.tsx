@@ -14,20 +14,23 @@ import { blue } from "@mui/material/colors";
 import { api } from "../../Service/api";
 import { Link } from "react-router-dom";
 import type { Patient } from "../../store/auth.store";
-
+import { useAuth } from "../../store/auth.store";
+import Delete from "../navigation/delete";
 
 
 const AppointmentsList = () => {
   const [query, setQuery] = useState("");
-  const [patients, setPatients] = useState<Patient[]>([]  
-  );
-  const [loading, setLoading] = useState(false)
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const { user } = useAuth();
+  const role = user?.role;
+
   const fetchPatients = async (search = "") => {
     try {
       setLoading(true);
-      const { data } = await api.get("/patients", {params:{ q: search },});
-console.log(data,'sa');
-      setPatients(data.items); 
+      const { data } = await api.get("/patients", { params: { q: search } });
+      setPatients(data.items);
     } catch (err) {
       console.error("Fetch patients error:", err);
     } finally {
@@ -52,12 +55,13 @@ console.log(data,'sa');
         <Typography variant="h5" gutterBottom>
           Bemorlar ro‘yxati
         </Typography>
-        <Link to="/create-patents" className="text-2xl">
-          Create new patient
-        </Link>
+        {role === "admin" && (
+          <Link to="/create-patents" className="text-2xl text-blue-600">
+            Create new patient
+          </Link>
+        )}
       </div>
 
-      {/* Search Input */}
       <Box mb={3}>
         <TextField
           fullWidth
@@ -80,8 +84,11 @@ console.log(data,'sa');
             </Typography>
           ) : (
             patients.map((p) => (
-              <Grid item xs={12} md={6} lg={4} key={p.id}>
-                <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
+              <div
+                key={p.id}
+                className="flex items-center justify-around flex-wrap"
+              >
+                <Card sx={{ borderRadius: 2, boxShadow: 3, width: 300 }}>
                   <CardHeader
                     avatar={
                       <Avatar sx={{ bgcolor: blue[500] }}>
@@ -101,15 +108,27 @@ console.log(data,'sa');
                     <Typography variant="body2" color="text.secondary">
                       Izoh: {p.notes || "—"}
                     </Typography>
-                    <Link
-                      to={`/patients/${p.id}`}
-                      className="text-blue-500 mt-2 inline-block"
-                    >
-                      tahrirlash
-                    </Link>
+
+                    <div className="flex items-center gap-2 mt-3">
+                      <Link
+                        to={`/patients/${p.id}`}
+                        className="text-blue-500 inline-block"
+                      >
+                        Tahrirlash
+                      </Link>
+
+                      <Delete
+                        id={p.id} 
+                        onDeleted={() =>
+                          setPatients((prev) =>
+                            prev.filter((x) => x.id !== p.id)
+                          )
+                        }
+                      />
+                    </div>
                   </CardContent>
                 </Card>
-              </Grid>
+              </div>
             ))
           )}
         </Grid>

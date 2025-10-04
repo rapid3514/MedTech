@@ -13,7 +13,6 @@ const Patentsmenegmant = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch patient
   const fetchPatient = async () => {
     try {
       const res = await api.get(`/patients/${id}`);
@@ -25,7 +24,6 @@ const Patentsmenegmant = () => {
     }
   };
 
-  // Update patient
   const handleUpdate = async () => {
     if (!patient) return;
     setSaving(true);

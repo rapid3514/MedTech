@@ -37,6 +37,10 @@ type AuthState = {
   ) => Promise<void>;
 };
 
+export interface deleteProps {
+  patientId: string;
+  onDeleted?: () => void; 
+}
 export const useAuth = create<AuthState>((set, get) => ({
   token: null,
   user: null,

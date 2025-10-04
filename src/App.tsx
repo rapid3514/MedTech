@@ -9,11 +9,10 @@ import ChangePassword from "./components/navigation/change-password";
 import CreateUserForm from "./components/users/create-user";
 import Userslist from "./components/users/users-list";
 import Chartspage from "./page/charts-page";
-import Addpatients from "./components/receptioncomp/addpatients";
 import Appontimentslist from "./components/receptioncomp/appontiments-list";
-import PatientsManagement from "./components/receptioncomp/patents-menegmant";
 import Patentsmenegmant from "./components/receptioncomp/patents-menegmant";
-import Appointments from "./components/receptioncomp/add-appontiments";
+import Appointments from "./components/receptioncomp/addpatients";
+import Uchrashuvlar from "./page/uchrashuvlar";
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
           >
             <Route index element={<Chartspage />} />
             <Route path="charts" element={<Chartspage />} />
-            <Route path="admin-patients" element={<PatientsManagement/>} />
+            <Route path="admin-patients" element={<Appontimentslist/>} />
             <Route path="user" element={<Userslist />} />
           </Route>
 
@@ -52,8 +51,8 @@ function App() {
               </RoleRoute>
             }
           >
-            <Route path="appontments" element={<Appontimentslist/>} />
-            <Route path="patients" element={<Addpatients />} />
+            <Route index element={<Appontimentslist/>} />
+            <Route path="patients" element={<Uchrashuvlar/>} />
           </Route>
 
           <Route path="/change-password" element={<ChangePassword />} />
