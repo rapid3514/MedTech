@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { AuthRefresh } from "./components/authComp/Auth-Refresh";
 import Login from "./page/Login";
 import { RoleRoute } from "./Routes/role-route";
@@ -19,7 +19,10 @@ function App() {
     <>
       <AuthRefresh>
         <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+
           <Route path="/login" element={<Login />} />
+
           <Route
             path="/admin"
             element={
@@ -30,7 +33,7 @@ function App() {
           >
             <Route index element={<Chartspage />} />
             <Route path="charts" element={<Chartspage />} />
-            <Route path="admin-patients" element={<Appontimentslist/>} />
+            <Route path="admin-patients" element={<Appontimentslist />} />
             <Route path="user" element={<Userslist />} />
           </Route>
 
@@ -51,8 +54,8 @@ function App() {
               </RoleRoute>
             }
           >
-            <Route index element={<Appontimentslist/>} />
-            <Route path="patients" element={<Uchrashuvlar/>} />
+            <Route index element={<Appontimentslist />} />
+            <Route path="patients" element={<Uchrashuvlar />} />
           </Route>
 
           <Route path="/change-password" element={<ChangePassword />} />

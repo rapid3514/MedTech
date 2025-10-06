@@ -11,12 +11,13 @@ import {
   CircularProgress,
   Snackbar,
   Alert,
+  Box,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { api } from "../../Service/api";
 import Delete from "../navigation/delete";
 import type { User } from "../../store/auth.store";
-
+import { Link } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -42,17 +43,30 @@ const UserList = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center mt-10">
+      <Container sx={{ py: 4, display: "flex", justifyContent: "center" }}>
         <CircularProgress />
-      </div>
+      </Container>
     );
   }
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h5" className="font-semibold mb-6">
+    <Container sx={{ py: 2, maxWidth: "100%" }}>
+    <div className="flex items-center justify-between">
+        <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ mb: 3, fontWeight: 600 }}
+      >
         Foydalanuvchilar ro‘yxati
       </Typography>
+      <Link to={"/create-user"}>
+      <Typography     variant="h4"
+         gutterBottom
+        sx={{ mb: 3, fontWeight: 600,color:'blue' }}
+        component="h1">Create User</Typography>
+      </Link>
+    </div>
 
       <Snackbar
         open={!!error}
@@ -65,53 +79,58 @@ const UserList = () => {
       </Snackbar>
 
       {users.length === 0 ? (
-        <Typography variant="body1" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: "center", mt: 2 }}
+        >
           Hech qanday foydalanuvchi topilmadi
         </Typography>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2} sx={{ px: 1 }}>
           {users.map((user) => (
-            <div className="flex items-center justify-around flex-wrap" >
+            <Grid key={user.id}>
               <Card
                 sx={{
-                  borderRadius: 3,
-                  boxShadow: 4,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: 2,
+                  boxShadow: 1,
                   transition: "0.3s",
-                  "&:hover": { transform: "translateY(-5px)", boxShadow: 6 },
+                  "&:hover": { transform: "translateY(-2px)", boxShadow: 3 },
                 }}
               >
-                <CardContent className="flex flex-col items-center text-center">
-                  <Avatar sx={{ bgcolor: blue[500], width: 60, height: 60, mb: 2 }}>
-                    {user.firstname?.[0] || "?"}
-                  </Avatar>
-
-                  <Typography variant="h6" gutterBottom>
-                    {user.firstname} {user.lastname}
-                  </Typography>
-
-                  <Typography variant="body2" color="text.secondary">
-                    {user.email}
-                  </Typography>
-
+                <CardContent sx={{ flexGrow: 1, pb: 2 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                    <Avatar sx={{ width: 48, height: 48, bgcolor: blue[500], mr: 2 }}>
+                      {user.firstname?.[0]?.toUpperCase() || "?"}
+                    </Avatar>
+                    <Box>
+                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
+                        {user.firstname} {user.lastname}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {user.email}
+                      </Typography>
+                    </Box>
+                  </Box>
                   <Typography
                     variant="body2"
                     color={user.role === "admin" ? "primary" : "text.secondary"}
-                    sx={{ mt: 1 }}
+                    sx={{ fontWeight: 500 }}
                   >
-                    Role: <b>{user.role}</b>
+                    Rol: {user.role}
                   </Typography>
                 </CardContent>
-
-                <CardActions sx={{ justifyContent: "center", pb: 2 }}>
+                <CardActions sx={{ justifyContent: "flex-end", pb: 2, px: 2 }}>
                   <Button
-                    variant="contained"
-                    color="primary"
+                    variant="outlined"
                     size="small"
-                    onClick={() => alert(`${user.firstname} ni tahrirlash funksiyasi`)}
+                    sx={{ mr: 1 }}
                   >
-                    Edit
+                    Tahrirlash
                   </Button>
-
                   <Delete
                     id={user.id}
                     endpoint="/users"
@@ -121,7 +140,7 @@ const UserList = () => {
                   />
                 </CardActions>
               </Card>
-            </div>
+            </Grid>
           ))}
         </Grid>
       )}

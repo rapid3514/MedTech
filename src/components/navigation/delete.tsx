@@ -2,13 +2,9 @@
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { api } from "../../Service/api";
-import { useAuth } from "../../store/auth.store";
+import { useAuth, type DeleteProps } from "../../store/auth.store";
 
-interface DeleteProps {
-  id: string;
-  endpoint?: string; // default /patients
-  onDeleted: () => void;
-}
+
 
 const Delete = ({ id, endpoint = "/patients", onDeleted }: DeleteProps) => {
   const { user } = useAuth();

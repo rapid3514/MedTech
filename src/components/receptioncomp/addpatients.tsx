@@ -7,7 +7,7 @@ import {
   Paper,
   MenuItem,
 } from "@mui/material";
-import { api } from "../../Service/api"; // sening api instance'ing
+import { api } from "../../Service/api"; 
 
 const Appointments = () => {
   const [form, setForm] = useState({

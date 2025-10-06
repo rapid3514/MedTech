@@ -73,13 +73,12 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* Doctor uchun */}
         {user?.role === "doctor" && (
           <Button
             variant="contained"
             color="primary"
             sx={{ marginTop: 1, width: "100%" }}
-            disabled // 👈 navigatsiya yo‘q, faqat button
+            disabled
           >
             Dashboard
           </Button>

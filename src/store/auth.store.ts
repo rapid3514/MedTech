@@ -10,7 +10,11 @@ export type User = {
   lastname: string;
   isActive: boolean;
 };
-
+export interface DeleteProps {
+  id: string;
+  endpoint?: string; 
+  onDeleted: () => void;
+}
 export type Patient = {
   id: string;
   firstName: string;
@@ -37,10 +41,7 @@ type AuthState = {
   ) => Promise<void>;
 };
 
-export interface deleteProps {
-  patientId: string;
-  onDeleted?: () => void; 
-}
+
 export const useAuth = create<AuthState>((set, get) => ({
   token: null,
   user: null,

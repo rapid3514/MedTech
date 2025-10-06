@@ -3,8 +3,8 @@ import { TextField, CircularProgress } from "@mui/material";
 import { api } from "../../Service/api";
 
 interface SearchProps {
-  endpoint: "/users" | "/patients"; // endpointni dinamik qabul qiladi
-  onResults: (data: any[]) => void; // natijani parentga qaytaradi
+  endpoint: "/users" | "/patients"; 
+  onResults: (data: any[]) => void; 
   placeholder?: string;
 }
 

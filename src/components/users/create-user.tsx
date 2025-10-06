@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { api } from "../../Service/api";
 import { Link } from "react-router-dom";
+import type { Role } from "../../store/auth.store";
 
 
-type Role = "admin" | "doctor" | "reception";
 
 export default function CreateUserForm() {
   const [email, setEmail] = useState("");
