@@ -9,22 +9,22 @@ import {
   Avatar,
   CircularProgress,
   TextField,
+  Button,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { api } from "../../Service/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { Patient } from "../../store/auth.store";
 import { useAuth } from "../../store/auth.store";
 import Delete from "../navigation/delete";
 
-
-const AppointmentsList = () => {
+const PatentsList = () => {
   const [query, setQuery] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState(false);
-
   const { user } = useAuth();
   const role = user?.role;
+  const navigate = useNavigate();
 
   const fetchPatients = async (search = "") => {
     try {
@@ -110,6 +110,16 @@ const AppointmentsList = () => {
                     </Typography>
 
                     <div className="flex items-center gap-2 mt-3">
+                      {/* 🆕 SEE button */}
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => navigate(`/patients-detail/${p.id}`)}
+                      >
+                        See
+                      </Button>
+
+                      {/* Tahrirlash */}
                       <Link
                         to={`/patients/${p.id}`}
                         className="text-blue-500 inline-block"
@@ -117,8 +127,10 @@ const AppointmentsList = () => {
                         Tahrirlash
                       </Link>
 
+                      {/* O‘chirish */}
                       <Delete
-                        id={p.id} 
+                        id={p.id}
+                        endpoint="/patients"
                         onDeleted={() =>
                           setPatients((prev) =>
                             prev.filter((x) => x.id !== p.id)
@@ -137,4 +149,4 @@ const AppointmentsList = () => {
   );
 };
 
-export default AppointmentsList;
+export default PatentsList;

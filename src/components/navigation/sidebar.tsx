@@ -45,6 +45,16 @@ const Sidebar = () => {
                 Patients menegmant
               </Button>
             </Link>
+            <Link to="/admin/appointments" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                appointments menegmant
+              </Button>
+            </Link>
+             
           </>
         )}
 
@@ -60,7 +70,7 @@ const Sidebar = () => {
               </Button>
             </Link>
 
-            <Link to="patients" style={{ textDecoration: "none" }}>
+            <Link to="appointments-list" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -69,6 +79,16 @@ const Sidebar = () => {
                 Uchrashuvlar
               </Button>
             </Link>
+              <Link to="appointments" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                appointments menegmant
+              </Button>
+            </Link>
+         
             
           </>
         )}

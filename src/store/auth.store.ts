@@ -10,6 +10,11 @@ export type User = {
   lastname: string;
   isActive: boolean;
 };
+export interface Doctor {
+  id: string;
+  firstname: string;
+  lastname: string;
+}
 export interface DeleteProps {
   id: string;
   endpoint?: string; 
