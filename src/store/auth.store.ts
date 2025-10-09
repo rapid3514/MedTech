@@ -31,6 +31,25 @@ export type Patient = {
   createdAt: boolean;
   updatedAt: boolean;
 };
+export interface Appointment {
+  id: string;
+  startAt: string;
+  endAt: string;
+  status: string;
+  reason: string;
+  patient: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
+  doctor: {
+    id: string;
+    firstname: string;
+    lastname: string;
+    role: string;
+  };
+}
+
 type AuthState = {
   token: string | null;
   user: User | null;
