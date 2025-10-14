@@ -1,8 +1,13 @@
-
 import axios from "axios";
 import { useAuth } from "../store/auth.store";
 
 export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
+  withCredentials: true,
+});
+
+// refresh uchun alohida axios
+const refreshApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
   withCredentials: true,
 });
@@ -19,7 +24,8 @@ let waiters: Array<() => void> = [];
 api.interceptors.response.use(
   (r) => r,
   async (err) => {
-    const original = err.config;
+    const original = err.config as any;
+
     if (err.response?.status === 401 && !original._retry) {
       if (refreshing) {
         await new Promise<void>((res) => waiters.push(res));
@@ -27,24 +33,29 @@ api.interceptors.response.use(
         original._retry = true;
         return api(original);
       }
+
       try {
         refreshing = true;
         original._retry = true;
-        const { data } = await api.post("/auth/refresh");
-        if (data?.access_token) {
-          useAuth.getState().login(data.access_token, data.user);
+        const { data } = await refreshApi.post("/auth/refresh");
+
+        if (data?.accessToken) {
+          useAuth.getState().login(data.accessToken, data.user);
           waiters.forEach((fn) => fn());
           waiters = [];
-          original.headers.Authorization = `Bearer ${data.access_token}`;
+          original.headers.Authorization = `Bearer ${data.accessToken}`;
           return api(original);
         }
       } catch (e) {
+        waiters.forEach((fn) => fn());
+        waiters = [];
         useAuth.getState().logout();
         throw e;
       } finally {
         refreshing = false;
       }
     }
+
     throw err;
   }
 );

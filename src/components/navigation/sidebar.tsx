@@ -3,7 +3,6 @@ import ReorderIcon from "@mui/icons-material/Reorder";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../store/auth.store";
 
-
 const Sidebar = () => {
   const { user } = useAuth();
 
@@ -36,7 +35,7 @@ const Sidebar = () => {
                 User
               </Button>
             </Link>
-               <Link to="/admin/admin-patients" style={{ textDecoration: "none" }}>
+            <Link to="/admin/admin-patients" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -54,7 +53,6 @@ const Sidebar = () => {
                 appointments menegmant
               </Button>
             </Link>
-             
           </>
         )}
 
@@ -79,7 +77,7 @@ const Sidebar = () => {
                 Uchrashuvlar
               </Button>
             </Link>
-              <Link to="appointments" style={{ textDecoration: "none" }}>
+            <Link to="appointments" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -88,20 +86,21 @@ const Sidebar = () => {
                 appointments menegmant
               </Button>
             </Link>
-         
-            
           </>
         )}
 
         {user?.role === "doctor" && (
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 1, width: "100%" }}
-            disabled
-          >
-            Dashboard
-          </Button>
+          <>
+            <Link to="" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 1, width: "100%" }}
+              >
+                appointments-list
+              </Button>
+            </Link>
+          </>
         )}
       </div>
     </div>

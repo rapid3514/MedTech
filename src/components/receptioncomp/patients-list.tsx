@@ -55,11 +55,9 @@ const PatentsList = () => {
         <Typography variant="h5" gutterBottom>
           Bemorlar ro‘yxati
         </Typography>
-        {role === "admin" && (
-          <Link to="/create-patents" className="text-2xl text-blue-600">
-            Create new patient
-          </Link>
-        )}
+        <Link to="/create-patents" className="text-2xl text-blue-600">
+          Create new patient
+        </Link>
       </div>
 
       <Box mb={3}>

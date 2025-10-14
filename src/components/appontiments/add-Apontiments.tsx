@@ -5,7 +5,6 @@ import type { Patient, User } from "../../store/auth.store";
 export default function CreateAppointmentForm() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [doctors, setDoctors] = useState<User[]>([]);
-  
 
   const [patientId, setPatientId] = useState("");
   const [doctorId, setDoctorId] = useState("");
@@ -32,7 +31,9 @@ export default function CreateAppointmentForm() {
       try {
         const res = await api.get("/users");
         const data: User[] = res.data.items ?? res.data;
-        const doctorsOnly = data.filter((u) => u.role?.toLowerCase() === "doctor");
+        const doctorsOnly = data.filter(
+          (u) => u.role?.toLowerCase() === "doctor"
+        );
         setDoctors(doctorsOnly);
       } catch (err) {
         console.error("Error fetching doctors", err);

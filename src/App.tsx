@@ -12,11 +12,12 @@ import Chartspage from "./page/charts-page";
 import Appontimentslist from "./components/receptioncomp/patients-list";
 import Patentsmenegmant from "./components/receptioncomp/patents-menegmant";
 import Appointments from "./components/receptioncomp/addpatients";
-import Uchrashuvlar from "./page/uchrashuvlar";
 import PatientDetails from "./components/receptioncomp/patient-detail";
 import AddAppointment from "./components/appontiments/add-Apontiments";
 import PatentsList from "./components/receptioncomp/patients-list";
 import AppointmentsList from "./components/appontiments/appointmnts-list";
+import Doctorappoint from "./components/doctorcom/doctor-appoint";
+import RecordsPage from "./components/doctorcom/record";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
             <Route path="charts" element={<Chartspage />} />
             <Route path="admin-patients" element={<Appontimentslist />} />
             <Route path="user" element={<Userslist />} />
-          <Route path="appointments" element={<AddAppointment />} />
+            <Route path="appointments" element={<AddAppointment />} />
           </Route>
 
           <Route
@@ -49,7 +50,9 @@ function App() {
                 <Doctor />
               </RoleRoute>
             }
-          />
+          >
+            <Route index element={<Doctorappoint />} />
+          </Route>
 
           <Route
             path="/reception"
@@ -60,18 +63,16 @@ function App() {
             }
           >
             <Route index element={<PatentsList />} />
-            <Route path="patients" element={<Uchrashuvlar />} />
-          <Route path="appointments" element={<AddAppointment />} />
-              <Route path="appointments-list" element={<AppointmentsList/>}/>
-
-
+            <Route path="appointments" element={<AddAppointment />} />
+            <Route path="appointments-list" element={<AppointmentsList />} />
           </Route>
 
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/create-patents" element={<Appointments />} />
           <Route path="/create-user" element={<CreateUserForm />} />
           <Route path="/patients/:id" element={<Patentsmenegmant />} />
-           <Route path="/patients-detail/:id" element={<PatientDetails />} />
+          <Route path="/patients-detail/:id" element={<PatientDetails />} />
+          <Route path="/patient/:patientId/records" element={<RecordsPage />} />
         </Routes>
       </AuthRefresh>
     </>

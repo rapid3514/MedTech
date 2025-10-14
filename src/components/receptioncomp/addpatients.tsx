@@ -7,9 +7,11 @@ import {
   Paper,
   MenuItem,
 } from "@mui/material";
-import { api } from "../../Service/api"; 
+import { api } from "../../Service/api";
+import { useNavigate } from "react-router-dom";
 
 const Appointments = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -33,7 +35,7 @@ const Appointments = () => {
     setSuccess(null);
     setError(null);
     try {
-      await api.post("/patients", form); 
+      await api.post("/patients", form);
       setSuccess("Bemor muvaffaqiyatli qo‘shildi!");
       setForm({
         firstName: "",
@@ -59,9 +61,19 @@ const Appointments = () => {
       }}
     >
       <Paper sx={{ p: 4, width: "100%", maxWidth: 500 }}>
-        <Typography variant="h6" gutterBottom>
-          Bemor qo‘shish
-        </Typography>
+        <div className="flex items-center justify-between">
+          <Typography variant="h6" gutterBottom>
+            Bemor qo‘shish
+          </Typography>
+          <Typography
+            variant="h6"
+            gutterBottom
+            onClick={() => navigate(-1)}
+            sx={{ cursor: "pointer", color: "blue" }}
+          >
+            Orqaga qaytish
+          </Typography>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <TextField

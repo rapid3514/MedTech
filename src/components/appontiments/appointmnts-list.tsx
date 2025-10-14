@@ -19,7 +19,7 @@ const AppointmentsList = () => {
     try {
       setLoading(true);
       const res = await api.get("/appointments");
-      const data = res.data.items || res.data; 
+      const data = res.data.items || res.data;
       setAppointments(data);
     } catch (err) {
       console.error("Error fetching appointments:", err);
@@ -37,7 +37,8 @@ const AppointmentsList = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Rostan ham ushbu appointmentni o‘chirmoqchimisiz?")) return;
+    if (!window.confirm("Rostan ham ushbu appointmentni o‘chirmoqchimisiz?"))
+      return;
     try {
       await api.delete(`/appointments/${id}`);
       setAppointments((prev) => prev.filter((a) => a.id !== id));
@@ -64,19 +65,34 @@ const AppointmentsList = () => {
             className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg"
           >
             <CardContent>
-              <Typography variant="h6" className="font-semibold text-gray-800 mb-2">
-                🧑‍⚕️ Shifokor: {a.doctor.firstname} {a.doctor.lastname}
+              <Typography
+                variant="h6"
+                className="font-semibold text-gray-800 mb-2"
+              >
+                Shifokor: {a.doctor.firstname} {a.doctor.lastname}
               </Typography>
               <Typography variant="body1" className="mb-1 text-gray-700">
-                👤 Bemor: {a.patient.firstName} {a.patient.lastName}
+                Bemor: {a.patient.firstName} {a.patient.lastName}
               </Typography>
-              <Typography variant="body2" color="textSecondary" className="mb-1">
-                ⏰ Boshlanish: {new Date(a.startAt).toLocaleString()}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                className="mb-1"
+              >
+                Boshlanish: {new Date(a.startAt).toLocaleString()}
               </Typography>
-              <Typography variant="body2" color="textSecondary" className="mb-1">
-                🕒 Tugash: {new Date(a.endAt).toLocaleString()}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                className="mb-1"
+              >
+                Tugash: {new Date(a.endAt).toLocaleString()}
               </Typography>
-                <Typography variant="body2" color="textSecondary" className="mb-1">
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                className="mb-1"
+              >
                 Reason: {a.reason}
               </Typography>
               <Typography
@@ -89,12 +105,12 @@ const AppointmentsList = () => {
                     : "text-red-600"
                 }`}
               >
-                📋 Status: {a.status}
+                Status: {a.status}
               </Typography>
 
               {a.reason && (
                 <Typography variant="body2" className="text-gray-600 mb-3">
-                  📝 Sabab: {a.reason}
+                  Sabab: {a.reason}
                 </Typography>
               )}
 

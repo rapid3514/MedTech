@@ -17,7 +17,7 @@ export interface Doctor {
 }
 export interface DeleteProps {
   id: string;
-  endpoint?: string; 
+  endpoint?: string;
   onDeleted: () => void;
 }
 export type Patient = {
@@ -41,6 +41,8 @@ export interface Appointment {
     id: string;
     firstName: string;
     lastName: string;
+    gender: string;
+    email: string;
   };
   doctor: {
     id: string;
@@ -64,7 +66,6 @@ type AuthState = {
     newPassword: string
   ) => Promise<void>;
 };
-
 
 export const useAuth = create<AuthState>((set, get) => ({
   token: null,
